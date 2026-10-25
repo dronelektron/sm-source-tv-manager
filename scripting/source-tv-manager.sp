@@ -1,4 +1,7 @@
 #include <sourcemod>
+#include <dhooks>
+
+#include "modules/detour.sp"
 
 public Plugin myinfo = {
     name = "SourceTV manager",
@@ -7,3 +10,7 @@ public Plugin myinfo = {
     version = "0.1.0",
     url = "https://github.com/dronelektron/sm-source-tv-manager"
 };
+
+public void OnPluginStart() {
+    Detour_Create();
+}

@@ -1,0 +1,19 @@
+"Games"
+{
+    "dod"
+    {
+        "Signatures"
+        {
+            "CHLTVDemoRecorder::StartRecording"
+            {
+                "library"   "engine"
+                "windows"   "\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x53\x56\x8B\xF1"
+            }
+            "CHLTVDemoRecorder::StopRecording"
+            {
+                "library"   "engine"
+                "windows"   "\x56\x8B\xF1\x80\xBE\x40\x05"
+            }
+        }
+    }
+}

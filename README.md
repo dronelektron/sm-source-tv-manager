@@ -13,4 +13,4 @@ Allows you to manage SourceTV
 ### Installation
 
 * Download latest [release](https://github.com/dronelektron/sm-source-tv-manager/releases)
-* Extract `plugins` folder to `addons/sourcemod` folder of your server
+* Extract `gamedata` and `plugins` folders to `addons/sourcemod` folder of your server
