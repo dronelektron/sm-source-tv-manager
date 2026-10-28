@@ -44,7 +44,7 @@ static void StartRecording_Create(GameData gameData) {
 }
 
 static MRESReturn OnStartRecording() {
-    PrintToServer("[Detour] OnStartRecording");
+    Forward_OnStartRecording();
 
     return MRES_Ignored;
 }
@@ -67,7 +67,7 @@ static MRESReturn OnStopRecording_Pre() {
 
 static MRESReturn OnStopRecording_Post() {
     if (g_recording) {
-        PrintToServer("[Detour] OnStopRecording");
+        Forward_OnStopRecording();
     }
 
     return MRES_Ignored;

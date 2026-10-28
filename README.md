@@ -14,3 +14,17 @@ Allows you to manage SourceTV
 
 * Download latest [release](https://github.com/dronelektron/sm-source-tv-manager/releases)
 * Extract `gamedata` and `plugins` folders to `addons/sourcemod` folder of your server
+
+### API
+
+Called when recording has started
+
+```sourcepawn
+forward void SourceTV_OnStartRecording();
+```
+
+Called when recording has stopped
+
+```sourcepawn
+forward void SourceTV_OnStopRecording();
+```

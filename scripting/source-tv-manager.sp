@@ -2,6 +2,7 @@
 #include <dhooks>
 
 #include "modules/detour.sp"
+#include "modules/forward.sp"
 #include "modules/recorder.sp"
 
 public Plugin myinfo = {
@@ -14,4 +15,5 @@ public Plugin myinfo = {
 
 public void OnPluginStart() {
     Detour_Create();
+    Forward_Create();
 }
