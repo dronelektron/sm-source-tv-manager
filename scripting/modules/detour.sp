@@ -8,9 +8,9 @@ void Detour_Create() {
 }
 
 static void StartRecording_Create(GameData gameData) {
-    DynamicDetour detour = DHookCreateDetour(Address_Null, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
+    Address address = gameData.GetMemSig("CHLTVDemoRecorder::StartRecording");
+    DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
 
-    detour.SetFromConf(gameData, SDKConf_Signature, "CHLTVDemoRecorder::StartRecording");
     detour.AddParam(HookParamType_CharPtr);
     detour.AddParam(HookParamType_Bool);
     detour.Enable(Hook_Post, OnStartRecording);
@@ -25,9 +25,9 @@ static MRESReturn OnStartRecording() {
 }
 
 static void StopRecording_Create(GameData gameData) {
-    DynamicDetour detour = DHookCreateDetour(Address_Null, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
+    Address address = gameData.GetMemSig("CHLTVDemoRecorder::StopRecording");
+    DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
 
-    detour.SetFromConf(gameData, SDKConf_Signature, "CHLTVDemoRecorder::StopRecording");
     detour.Enable(Hook_Post, OnStopRecording);
 
     delete detour;
