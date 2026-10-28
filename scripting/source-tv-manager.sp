@@ -2,6 +2,7 @@
 #include <dhooks>
 
 #include "modules/detour.sp"
+#include "modules/recorder.sp"
 
 public Plugin myinfo = {
     name = "SourceTV manager",

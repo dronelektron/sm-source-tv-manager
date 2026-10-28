@@ -4,6 +4,11 @@
     {
         "Signatures"
         {
+            "CHLTVDemoRecorder::CHLTVDemoRecorder"
+            {
+                "library"   "engine"
+                "windows"   "\x56\x8B\xF1\x8D\x4E\x04\xC7\x06\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x8D\x8E\x58"
+            }
             "CHLTVDemoRecorder::StartRecording"
             {
                 "library"   "engine"
@@ -13,6 +18,13 @@
             {
                 "library"   "engine"
                 "windows"   "\x56\x8B\xF1\x80\xBE\x40\x05"
+            }
+        }
+        "Offsets"
+        {
+            "CHLTVDemoRecorder::m_bRecording"
+            {
+                "windows"   "1344"
             }
         }
     }

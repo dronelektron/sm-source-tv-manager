@@ -1,10 +1,35 @@
+static bool g_recording = false;
+
 void Detour_Create() {
     GameData gameData = LoadGameData("source-tv-manager.games");
 
+    Recorder_Create(gameData);
+    Recorder_Status_Create(gameData);
     StartRecording_Create(gameData);
     StopRecording_Create(gameData);
 
     delete gameData;
+}
+
+static void Recorder_Create(GameData gameData) {
+    Address address = GetFunctionAddress(gameData, "CHLTVDemoRecorder::CHLTVDemoRecorder");
+    DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Address);
+
+    detour.Enable(Hook_Post, OnRecorder);
+
+    delete detour;
+}
+
+static MRESReturn OnRecorder(Address pThis) {
+    Recorder_Set(pThis);
+
+    return MRES_Ignored;
+}
+
+static void Recorder_Status_Create(GameData gameData) {
+    Address address = GetFieldOffset(gameData, "CHLTVDemoRecorder::m_bRecording");
+
+    Recorder_Status_Set(address);
 }
 
 static void StartRecording_Create(GameData gameData) {
@@ -28,13 +53,22 @@ static void StopRecording_Create(GameData gameData) {
     Address address = GetFunctionAddress(gameData, "CHLTVDemoRecorder::StopRecording");
     DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
 
-    detour.Enable(Hook_Post, OnStopRecording);
+    detour.Enable(Hook_Pre, OnStopRecording_Pre);
+    detour.Enable(Hook_Post, OnStopRecording_Post);
 
     delete detour;
 }
 
-static MRESReturn OnStopRecording() {
-    PrintToServer("[Detour] OnStopRecording");
+static MRESReturn OnStopRecording_Pre() {
+    g_recording = Recorder_IsActive();
+
+    return MRES_Ignored;
+}
+
+static MRESReturn OnStopRecording_Post() {
+    if (g_recording) {
+        PrintToServer("[Detour] OnStopRecording");
+    }
 
     return MRES_Ignored;
 }
@@ -57,4 +91,14 @@ static Address GetFunctionAddress(GameData gameData, const char[] name) {
     }
 
     return address;
+}
+
+static Address GetFieldOffset(GameData gameData, const char[] name) {
+    int offset = gameData.GetOffset(name);
+
+    if (offset == -1) {
+        SetFailState("Failed to get offset of '%s' field", name);
+    }
+
+    return view_as<Address>(offset);
 }
