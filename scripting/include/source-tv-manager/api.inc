@@ -6,3 +6,5 @@
 forward void SourceTV_OnStartRecording();
 
 forward void SourceTV_OnStopRecording();
+
+native bool SourceTV_IsRecording();

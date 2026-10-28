@@ -28,3 +28,9 @@ Called when recording has stopped
 ```sourcepawn
 forward void SourceTV_OnStopRecording();
 ```
+
+Checks whether SourceTV is recording
+
+```sourcepawn
+native bool SourceTV_IsRecording();
+```

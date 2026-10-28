@@ -3,6 +3,7 @@
 
 #include "modules/detour.sp"
 #include "modules/forward.sp"
+#include "modules/native.sp"
 #include "modules/recorder.sp"
 
 public Plugin myinfo = {
@@ -16,4 +17,10 @@ public Plugin myinfo = {
 public void OnPluginStart() {
     Detour_Create();
     Forward_Create();
+}
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int errorMax) {
+    Native_Create();
+
+    return APLRes_Success;
 }
