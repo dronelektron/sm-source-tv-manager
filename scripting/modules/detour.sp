@@ -1,5 +1,5 @@
 void Detour_Create() {
-    GameData gameData = new GameData("source-tv-manager.games");
+    GameData gameData = LoadGameData("source-tv-manager.games");
 
     StartRecording_Create(gameData);
     StopRecording_Create(gameData);
@@ -8,7 +8,7 @@ void Detour_Create() {
 }
 
 static void StartRecording_Create(GameData gameData) {
-    Address address = gameData.GetMemSig("CHLTVDemoRecorder::StartRecording");
+    Address address = GetFunctionAddress(gameData, "CHLTVDemoRecorder::StartRecording");
     DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
 
     detour.AddParam(HookParamType_CharPtr);
@@ -25,7 +25,7 @@ static MRESReturn OnStartRecording() {
 }
 
 static void StopRecording_Create(GameData gameData) {
-    Address address = gameData.GetMemSig("CHLTVDemoRecorder::StopRecording");
+    Address address = GetFunctionAddress(gameData, "CHLTVDemoRecorder::StopRecording");
     DynamicDetour detour = DHookCreateDetour(address, CallConv_THISCALL, ReturnType_Void, ThisPointer_Ignore);
 
     detour.Enable(Hook_Post, OnStopRecording);
@@ -37,4 +37,24 @@ static MRESReturn OnStopRecording() {
     PrintToServer("[Detour] OnStopRecording");
 
     return MRES_Ignored;
+}
+
+static GameData LoadGameData(const char[] name) {
+    GameData gameData = new GameData(name);
+
+    if (gameData == null) {
+        SetFailState("Failed to load '%s' game data", name);
+    }
+
+    return gameData;
+}
+
+static Address GetFunctionAddress(GameData gameData, const char[] name) {
+    Address address = gameData.GetMemSig(name);
+
+    if (address == Address_Null) {
+        SetFailState("Failed to get address of '%s' function", name);
+    }
+
+    return address;
 }
