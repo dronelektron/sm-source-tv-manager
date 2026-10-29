@@ -3,7 +3,7 @@
 #endif
 #define _source_tv_manager_api_included
 
-forward void SourceTV_OnStartRecording();
+forward void SourceTV_OnStartRecording(const char[] name);
 
 forward void SourceTV_OnStopRecording();
 

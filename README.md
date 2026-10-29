@@ -20,7 +20,7 @@ Allows you to manage SourceTV
 Called when recording has started
 
 ```sourcepawn
-forward void SourceTV_OnStartRecording();
+forward void SourceTV_OnStartRecording(const char[] name);
 ```
 
 Called when recording has stopped

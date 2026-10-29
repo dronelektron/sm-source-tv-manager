@@ -43,9 +43,13 @@ static void StartRecording_Create(GameData gameData) {
     delete detour;
 }
 
-static MRESReturn OnStartRecording() {
+static MRESReturn OnStartRecording(DHookParam params) {
     if (Recorder_IsActive()) {
-        Forward_OnStartRecording();
+        char name[PLATFORM_MAX_PATH];
+
+        params.GetString(1, name, sizeof(name));
+
+        Forward_OnStartRecording(name);
     }
 
     return MRES_Ignored;
