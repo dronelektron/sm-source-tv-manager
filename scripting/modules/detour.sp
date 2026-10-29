@@ -6,6 +6,7 @@ void Detour_Create() {
     Recorder_Create(gameData);
     Recorder_Status_Create(gameData);
     Recorder_DemoName_Create(gameData);
+    Recorder_RecordingTime_Create(gameData);
     StartRecording_Create(gameData);
     StopRecording_Create(gameData);
 
@@ -37,6 +38,12 @@ static void Recorder_DemoName_Create(GameData gameData) {
     Address address = GetFieldOffset(gameData, "CHLTVDemoRecorder::m_szDemoName");
 
     Recorder_DemoName_Set(address);
+}
+
+static void Recorder_RecordingTime_Create(GameData gameData) {
+    Address address = GetFieldOffset(gameData, "CHLTVDemoRecorder::m_flRecordingTime");
+
+    Recorder_RecordingTime_Set(address);
 }
 
 static void StartRecording_Create(GameData gameData) {
@@ -83,7 +90,10 @@ static MRESReturn OnStopRecording_Post() {
         char name[PLATFORM_MAX_PATH];
 
         Recorder_GetDemoName(name);
-        Forward_OnStopRecording(name);
+
+        float recordingTime = Recorder_GetRecordingTime();
+
+        Forward_OnStopRecording(name, recordingTime);
     }
 
     return MRES_Ignored;

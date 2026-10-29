@@ -35,6 +35,11 @@
                 "windows"   "4"
                 "linux"     "4"
             }
+            "CHLTVDemoRecorder::m_flRecordingTime"
+            {
+                "windows"   "1320"
+                "linux"     "1320"
+            }
         }
     }
 }
