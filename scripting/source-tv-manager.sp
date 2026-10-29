@@ -1,4 +1,10 @@
 #include <sourcemod>
+#include <dhooks>
+
+#include "modules/detour.sp"
+#include "modules/forward.sp"
+#include "modules/native.sp"
+#include "modules/recorder.sp"
 
 public Plugin myinfo = {
     name = "SourceTV manager",
@@ -7,3 +13,14 @@ public Plugin myinfo = {
     version = "0.1.0",
     url = "https://github.com/dronelektron/sm-source-tv-manager"
 };
+
+public void OnPluginStart() {
+    Detour_Create();
+    Forward_Create();
+}
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int errorMax) {
+    Native_Create();
+
+    return APLRes_Success;
+}

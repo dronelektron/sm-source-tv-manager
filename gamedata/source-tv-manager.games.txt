@@ -1,0 +1,45 @@
+"Games"
+{
+    "dod"
+    {
+        "Signatures"
+        {
+            "CHLTVDemoRecorder::CHLTVDemoRecorder"
+            {
+                "library"   "engine"
+                "windows"   "\x56\x8B\xF1\x8D\x4E\x04\xC7\x06\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x8D\x8E\x58"
+                "linux"     "@_ZN17CHLTVDemoRecorderC2Ev"
+            }
+            "CHLTVDemoRecorder::StartRecording"
+            {
+                "library"   "engine"
+                "windows"   "\x55\x8B\xEC\x81\xEC\x04\x01\x00\x00\x53\x56\x8B\xF1"
+                "linux"     "@_ZN17CHLTVDemoRecorder14StartRecordingEPKcb"
+            }
+            "CHLTVDemoRecorder::StopRecording"
+            {
+                "library"   "engine"
+                "windows"   "\x56\x8B\xF1\x80\xBE\x40\x05"
+                "linux"     "@_ZN17CHLTVDemoRecorder13StopRecordingEv"
+            }
+        }
+        "Offsets"
+        {
+            "CHLTVDemoRecorder::m_bRecording"
+            {
+                "windows"   "1344"
+                "linux"     "1344"
+            }
+            "CHLTVDemoRecorder::m_szDemoName"
+            {
+                "windows"   "4"
+                "linux"     "4"
+            }
+            "CHLTVDemoRecorder::m_flRecordingTime"
+            {
+                "windows"   "1320"
+                "linux"     "1320"
+            }
+        }
+    }
+}
