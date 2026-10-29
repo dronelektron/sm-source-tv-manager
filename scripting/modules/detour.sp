@@ -44,7 +44,9 @@ static void StartRecording_Create(GameData gameData) {
 }
 
 static MRESReturn OnStartRecording() {
-    Forward_OnStartRecording();
+    if (Recorder_IsActive()) {
+        Forward_OnStartRecording();
+    }
 
     return MRES_Ignored;
 }
