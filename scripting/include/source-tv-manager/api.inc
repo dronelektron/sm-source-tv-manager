@@ -5,6 +5,6 @@
 
 forward void SourceTV_OnStartRecording(const char[] name);
 
-forward void SourceTV_OnStopRecording();
+forward void SourceTV_OnStopRecording(const char[] name);
 
 native bool SourceTV_IsRecording();

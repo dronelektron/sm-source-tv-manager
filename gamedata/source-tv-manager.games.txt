@@ -30,6 +30,11 @@
                 "windows"   "1344"
                 "linux"     "1344"
             }
+            "CHLTVDemoRecorder::m_szDemoName"
+            {
+                "windows"   "4"
+                "linux"     "4"
+            }
         }
     }
 }

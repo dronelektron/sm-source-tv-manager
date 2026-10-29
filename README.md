@@ -26,7 +26,7 @@ forward void SourceTV_OnStartRecording(const char[] name);
 Called when recording has stopped
 
 ```sourcepawn
-forward void SourceTV_OnStopRecording();
+forward void SourceTV_OnStopRecording(const char[] name);
 ```
 
 Checks whether SourceTV is recording
